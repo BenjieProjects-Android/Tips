@@ -51,6 +51,7 @@ function_latest_version() {
 		echo "最新tips版本查询失败，请检查网络连接情况..."
 	fi
 	rm -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR
+	sync
 }
 
 function_update_latest() {
@@ -76,17 +77,16 @@ function_update_latest() {
 
 		rm -rf $DEFINE_TARGET_TIPS_DIR
 		mkdir -p $DEFINE_TARGET_TIPS_DIR
-		cp -rf $DEFINE_TARGET_TIPS_PROJECT_DIR $DEFINE_TARGET_TIPS_DIR
+		cp -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR $DEFINE_TARGET_TIPS_DIR
 		chmod 755 $DEFINE_TARGET_TIPS_DIR
-		sync
-
-		rm -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR
 		sync
 
 		echo "更新 tips 成功，请重启终端工具使用"
 	else
 		echo "更新 tips 失败，请检查网络链接情况..."
 	fi
+	rm -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR
+	sync
 }
 
 function_run_version() {
