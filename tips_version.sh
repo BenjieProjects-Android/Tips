@@ -24,16 +24,10 @@ function_local_version() {
 
 function_latest_version() {
 	originDir=`pwd`
-
 	# check tips version on gitlab and print the latest version on screen.
-	if [[ -d $DEFINE_UPDATE_TIPS_PROJECT_DIR ]]; then
-		rm -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR
-	fi
-	if [[ ! -d $DEFINE_UPDATE_TIPS_DIR ]]; then
-		mkdir -p $DEFINE_UPDATE_TIPS_DIR
-	fi
+	rm -rf $DEFINE_UPDATE_TIPS_DIR
+	mkdir -p $DEFINE_UPDATE_TIPS_DIR
 	cd $DEFINE_UPDATE_TIPS_DIR
-
 	# clone from remote.
 	git clone $DEFINE_TIPS_PROJECT_URL
 	cd $originDir
@@ -50,29 +44,23 @@ function_latest_version() {
 		function_local_version
 		echo "最新tips版本查询失败，请检查网络连接情况..."
 	fi
-	rm -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR
+	rm -rf $DEFINE_UPDATE_TIPS_DIR
 	sync
 }
 
 function_update_latest() {
 	originDir=`pwd`
-
 	# check tips version on gitlab and print the latest version on screen.
-	if [[ -d $DEFINE_UPDATE_TIPS_PROJECT_DIR ]]; then
-		rm -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR
-	fi
-	if [[ ! -d $DEFINE_UPDATE_TIPS_DIR ]]; then
-		mkdir -p $DEFINE_UPDATE_TIPS_DIR
-	fi
+	rm -rf $DEFINE_UPDATE_TIPS_DIR
+	mkdir -p $DEFINE_UPDATE_TIPS_DIR
 	cd $DEFINE_UPDATE_TIPS_DIR
-
 	# TODO: zhangfan. here must be a remote .git url
 	git clone $DEFINE_TIPS_PROJECT_URL
 	cd $originDir
 
-	if [[ -d $DEFINE_UPDATE_TIPS_PROJECT_DIR ]] && [[ -f $DEFINE_UPDATE_TIPS_PROJECT_DIR/tips_version.sh ]]; then
-		cp -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR/tips_version.sh ~/tips_version.sh
-		chmod 755 ~/tips_version.sh
+	if [[ -d $DEFINE_UPDATE_TIPS_PROJECT_DIR ]] && [[ -f $DEFINE_UPDATE_TIPS_PROJECT_DIR/tips.sh ]]; then
+		cp -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR/tips.sh ~/tips.sh
+		chmod 755 ~/tips.sh
 		sync
 
 		rm -rf $DEFINE_TARGET_TIPS_DIR
@@ -80,12 +68,11 @@ function_update_latest() {
 		cp -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR $DEFINE_TARGET_TIPS_DIR
 		chmod 755 $DEFINE_TARGET_TIPS_DIR
 		sync
-
 		echo "更新 tips 成功，请重启终端工具使用"
 	else
 		echo "更新 tips 失败，请检查网络链接情况..."
 	fi
-	rm -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR
+	rm -rf $DEFINE_UPDATE_TIPS_DIR
 	sync
 }
 
