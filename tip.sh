@@ -53,8 +53,8 @@ function_install_tips_packages() {
 		cp -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR $DEFINE_TARGET_TIPS_DIR
 		chmod 755 $DEFINE_TARGET_TIPS_DIR
 
-		cp -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR/tips.sh ~/tips.sh
-		chmod 755 ~/tips.sh
+		cp -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR/tip.sh ~/tip.sh
+		chmod 755 ~/tip.sh
 
 		echo "\t\t 安装 tips 组件成功，重启终端工具后使用"
 	else

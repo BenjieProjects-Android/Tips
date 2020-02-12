@@ -59,8 +59,8 @@ function_update_latest() {
 	cd $originDir
 
 	if [[ -d $DEFINE_UPDATE_TIPS_PROJECT_DIR ]] && [[ -f $DEFINE_UPDATE_TIPS_PROJECT_DIR/tips.sh ]]; then
-		cp -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR/tips.sh ~/tips.sh
-		chmod 755 ~/tips.sh
+		cp -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR/tip.sh ~/tip.sh
+		chmod 755 ~/tip.sh
 		sync
 
 		rm -rf $DEFINE_TARGET_TIPS_DIR
