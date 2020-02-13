@@ -58,7 +58,7 @@ function_update_latest() {
 	git clone $DEFINE_TIPS_PROJECT_URL
 	cd $originDir
 
-	if [[ -d $DEFINE_UPDATE_TIPS_PROJECT_DIR ]] && [[ -f $DEFINE_UPDATE_TIPS_PROJECT_DIR/tips.sh ]]; then
+	if [[ -d $DEFINE_UPDATE_TIPS_PROJECT_DIR ]] && [[ -f $DEFINE_UPDATE_TIPS_PROJECT_DIR/tip.sh ]]; then
 		cp -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR/tip.sh ~/tip.sh
 		chmod 755 ~/tip.sh
 		sync
