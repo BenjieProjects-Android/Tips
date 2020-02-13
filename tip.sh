@@ -10,7 +10,7 @@ DEFINE_TARGET_TIPS_DIR=~/.tips
 DEFINE_TARGET_TIPS_PROJECT_DIR=$DEFINE_TARGET_TIPS_DIR/Tips
 DEFINE_UPDATE_TIPS_DIR=~/.tips_update
 DEFINE_UPDATE_TIPS_PROJECT_DIR=$DEFINE_UPDATE_TIPS_DIR/Tips
-DEFINE_TIPS_PROJECT_URL=git@github.com:zhangfanschool/Tips.git
+DEFINE_TIPS_PROJECT_URL=https://github.com/zhangfanschool/Tips.git
 
 function_initial_tips() {
 	if [[ -f ~/.bash_profile ]]; then

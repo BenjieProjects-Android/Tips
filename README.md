@@ -12,22 +12,9 @@
 
 1. 推荐安装MAC终端工具：iTerm2 
 2. 推荐安装：oh-my-zshell
-3. 源码 clone：
+3. 一条指令助你安装：`cd ~;rm -rf ~/Temp;mkdir -p ~/Temp;cd ~/Temp;git clone https://github.com/zhangfanschool/Tips.git;cd ~;cp ~/Temp/Tips/tip.sh ~;chmod 755 ~/tip.sh;~/tip.sh init;`
 
-	```
-	mkdir -p ~/Temp
-	cd ~/Temp
-	git clone git@github.com:zhangfanschool/Tips.git
-	cd -
-	```
-
-4. 代码 clone 完成后，执行如下指令：
-
-	```
-	cp ~/Temp/Tips/tip.sh ~;chmod 755 ~/tip.sh;~/tip.sh init;
-	```
-
-5. 重启 iTerm2 终端，即可全局使用 tips 命令了
+5. 重启 iTerm2，即可全局使用 tips 命令了
 
 ---
 
