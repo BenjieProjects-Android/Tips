@@ -12,14 +12,22 @@
 
 1. 推荐安装MAC终端工具：iTerm2 
 2. 推荐安装：oh-my-zshell
-3. 源码 clone：`git clone git@github.com:zhangfanschool/Tips.git`
-4. 将 tip.sh 拷贝至用户目录：MAC 一般是：~ 路径下，该路径代表用户目录
-5. 打开 iTerm2 终端，执行如下命令：
-	
+3. 源码 clone：
+
 	```
-	chmod 755 ~/tip.sh;~/tip.sh init
+	mkdir -p ~/Temp
+	cd ~/Temp
+	git clone git@github.com:zhangfanschool/Tips.git
+	cd -
 	```
-6. 重启 iTerm2 终端，即可全局使用 tips 命令了
+
+4. 代码 clone 完成后，执行如下指令：
+
+	```
+	cp ~/Temp/Tips/tip.sh ~;chmod 755 ~/tip.sh;~/tip.sh init;
+	```
+
+5. 重启 iTerm2 终端，即可全局使用 tips 命令了
 
 ---
 
@@ -45,6 +53,7 @@ tip commands:[command]
 	 -l,--l,log,-log,--log,logcat,-logcat,--logcat                       日志系统：提示Android设备常用打日志方法...
 	 -d,--d,dump,-dump,--dump,dumpsys,-dumpsys,--dumpsys                 功能命令：常用dumpsys及pm命令...
 	```
+
 2. 关于使用：tips 后面跟支持的命令参数即可。如 `tips -h`, `tips -v`, `tips -lv` 等。
 
 ---
