@@ -1,4 +1,4 @@
-## Android 开发者之 MAC OS 全局小工具 --- tips
+## `Android` 开发者之 `MAC OS` 全局小工具 --- `tips`
 
 ---
 
@@ -10,11 +10,13 @@
 ---
 ### 工具部署：
 
-1. 推荐安装MAC终端工具：iTerm2 
-2. 推荐安装：oh-my-zshell
-3. 一条指令助你安装：`cd ~;rm -rf ~/Temp;mkdir -p ~/Temp;cd ~/Temp;git clone https://github.com/zhangfanschool/Tips.git;cd ~;cp ~/Temp/Tips/tip.sh ~;chmod 755 ~/tip.sh;~/tip.sh init;`
+1. 推荐终端：`iTerm2` 
+2. 推荐安装：`oh-my-zsh`
+3. 快速安装：
+	+ `cd ~;rm -rf ~/Temp;mkdir -p ~/Temp;cd ~/Temp;git clone https://github.com/zhangfanschool/Tips.git`
+	+ `cd ~;cp ~/Temp/Tips/tip.sh ~;chmod 755 ~/tip.sh;~/tip.sh init;rm -rf ~/Temp`
 
-5. 重启 iTerm2，即可全局使用 tips 命令了
+4. 重启 `iTerm2`，即可全局使用 `tips` 命令了
 
 ---
 
@@ -40,10 +42,10 @@
 		 -d,--d,dump,-dump,--dump,dumpsys,-dumpsys,--dumpsys                 功能命令：常用dumpsys及pm命令...
 	```
 
-2. 关于使用：tips 后面跟支持的命令参数即可。如 `tips -h`, `tips -v`, `tips -lv` 等。
+2. 关于使用：`tips` 后面跟支持的命令参数即可。如 `tips -h`, `tips -v`, `tips -lv` 等。
 
 ---
 
 ### 其他：
-1. 如在部署中遇到问题，可以 issue，可以邮件沟通。
-2. 想加入工具的持续开发与迭代？邮件沟通，放上个人 ssh 公钥即可。
+1. 如在部署中遇到问题，可以 `issue`，可以邮件沟通。
+2. 想加入工具的持续开发与迭代？邮件沟通，放上个人 `ssh` 公钥即可。
