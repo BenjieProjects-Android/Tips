@@ -13,25 +13,27 @@ DEFINE_UPDATE_TIPS_PROJECT_DIR=$DEFINE_UPDATE_TIPS_DIR/Tips
 DEFINE_TIPS_PROJECT_URL=https://github.com/zhangfanschool/Tips.git
 
 function_initial_tips() {
-	if [[ -f ~/.bash_profile ]]; then
-		bashProfileResult=$(cat ~/.bash_profile | grep alias | grep tips | grep tip.sh)
-		if [[ "${bashProfileResult}"x == ""x ]]; then
-			chmod 777 ~/.bash_profile
-			echo alias tips=\'~/tip.sh\' >> ~/.bash_profile
-		fi
-		echo "\t\t ~/.bash_profile 环境部署完成，打开默认终端工具执行：source ~/.bash_profile;tips"
-	else
-		echo "\t\t 请确保电脑已经brew工具和item2工具，安装后，请打开item2工具，并执行：chmod 755 ~/tips.sh;~/tips.sh init"
+	if [[ ! -f ~/.bash_profile ]]; then
+		touch ~/.bash_profile
 	fi
-	if [[ -f ~/.zshrc ]]; then
+	chmod 777 ~/.bash_profile
+	bashProfileResult=$(cat ~/.bash_profile | grep alias | grep tips | grep tip.sh)
+	if [[ "${bashProfileResult}"x == ""x ]]; then
+		echo "" >> ~/.bash_profile
+		echo alias tips=\'~/tip.sh\' >> ~/.bash_profile
+		echo "\t\t MAC默认终端已经部署完成，如果您想使用默认终端工具，打开后，输入source ~/.bash_profile，即可全局使用tips命令"
+	fi
+	if [[ -d ~/.oh-my-zsh ]] && [[ -f ~/.zshrc ]]; then
 		zshellResult=$(cat ~/.zshrc | grep alias | grep tips | grep tip.sh)
 		if [[ "${zshellResult}"x == ""x ]]; then
 			chmod 644 ~/.zshrc
+			echo "" >> ~/.zshrc
 			echo alias tips=\'~/tip.sh\' >> ~/.zshrc
 		fi
-		echo "\t\t ~/.zshrc 环境部署完成，打开item2的终端执行：tips"
+		echo "\t\t oh-my-zsh环境部署完成，使用item2的终端即可全局使用 tips 命令"
 	else
-		echo "\t\t 请确保电脑已经brew工具和item2工具，安装后，请打开item2工具，并执行：chmod 755 ~/tips.sh;~/tips.sh init"
+		echo "\t\t 未检测到电脑安装oh-my-zsh，安装iTerm2工具后，安装oh-my-zsh"
+		echo "\t\t 安装好 iTerm2和oh-my-zsh后，执行：chmod 755 ~/tips.sh;~/tips.sh init完成iTerm2环境部署"
 	fi
 }
 
@@ -64,22 +66,54 @@ function_install_tips_packages() {
 	sync
 }
 
+function_check_git() {
+	brewResult=`type brew`
+	if [[ ${brewResult} == *"brew not found"* ]]; then
+		echo "\t\t 提示：brew 程序未安装，官网安装地址：https://brew.sh"
+		echo "===>>> 正在为您安装brew程序 <<<==="
+		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		echo "===>>> brew程序已安装完成 <<<==="
+	fi
+	gitResult=`type git`
+	if [[ ${gitResult} == *"git not found"* ]]; then
+		echo "\t\t 提示：git 程序未安装"
+		echo "===>>> 正在为您安装git程序 <<<==="
+		brew install git
+		echo "===>>> git程序已安装完成 <<<==="
+	fi
+}
+
+function_check_init_result() {
+	# check tips
+	if [[ -d $DEFINE_TARGET_TIPS_PROJECT_DIR ]] && [[ -f $DEFINE_TARGET_TIPS_PROJECT_DIR/tip.sh ]] && [[ -f ~/tip.sh ]]; then
+		bashProfileResult=$(cat ~/.bash_profile | grep alias | grep tips | grep tip.sh)
+		if [[ ${bashProfileResult} != "" ]]; then
+			echo "tips初始化完成，MAC 默认终端部署完成，全局可用tips程序!!!"
+		fi
+		if [[ -d ~/.oh-my-zsh ]] && [[ -f ~/.zshrc ]]; then
+			zshellResult=$(cat ~/.zshrc | grep alias | grep tips | grep tip.sh)
+			if [[ "${zshellResult}" != "" ]]; then
+				echo "tips初始化完成，iTerm2终端部署完成，全局可用tips程序!!!"
+			else
+				echo "tips初始化完成，iTerm2终端部署失败，so boring"
+			fi
+		fi
+	fi
+}
+
 function_init() {
-	echo "电脑环境要求："
-		echo "\t 1. MAC 电脑推荐安装终端工具：iterm2"
-			echo "\t\t 1.1 确保电脑联网"
-			echo "\t\t 1.2 安装 MAC 电脑必备工具 iterm2，官网安装地址：https://www.iterm2.com/downloads.html"
-		echo "\t 2. 电脑具备 git，如果未安装，请参考如下文档进行安装："
-			echo "\t\t 2.1 确保电脑联网"
-			echo "\t\t 2.2 安装 MAC 电脑必备工具 Homebrew，官网安装地址：https://brew.sh"
-			echo "\t\t 2.3 通过 Homebrew 安装 git，安装方式为：brew install git"
-			echo "\t\t 2.4 打开 item2，执行 chmod 755 ~/tips.sh;~/tips.sh init"
-		echo "\t 3. 全局环境部署："
+	echo "tips初始化中，请稍候..."
+		echo "\t 1. git 程序检查中..."
+			function_check_git
+		echo "\t 2. iterm2，如已安装，请忽略。如未安装，请手动下载安装，官网安装地址：https://www.iterm2.com/downloads.html"
+			# echo "\t\t 打开 item2，执行 chmod 755 ~/tips.sh;~/tips.sh init"
+		echo "\t 3. tips全局环境部署中..."
 			# init tips as a tool for mac os.
 			function_initial_tips
-
 			# install tips package.
 			function_install_tips_packages
+	# check tips
+	function_check_init_result
 }
 
 function_print_version() {
