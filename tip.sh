@@ -62,7 +62,7 @@ function_install_tips_packages() {
 	else
 		echo "\t\t 安装 tips 失败，请在网络可用情况下，重新执行 tips init"
 	fi
-	rm -rf $DEFINE_UPDATE_TIPS_PROJECT_DIR
+	rm -rf $DEFINE_UPDATE_TIPS_DIR
 	sync
 }
 
