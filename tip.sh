@@ -69,17 +69,51 @@ function_install_tips_packages() {
 function_check_git() {
 	brewResult=`type brew`
 	if [[ ${brewResult} == *"brew not found"* ]]; then
-		echo "\t\t 提示：brew 程序未安装，官网安装地址：https://brew.sh"
-		echo "===>>> 正在为您安装brew程序 <<<==="
+		echo "\t\t 提示：brew 程序未安装，官网地址：https://brew.sh"
+		echo "===>>> 正在为您自动安装brew程序 <<<==="
 		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-		echo "===>>> brew程序已安装完成 <<<==="
+		echo "===>>> brew程序已自动安装完成 <<<==="
 	fi
 	gitResult=`type git`
 	if [[ ${gitResult} == *"git not found"* ]]; then
 		echo "\t\t 提示：git 程序未安装"
-		echo "===>>> 正在为您安装git程序 <<<==="
+		echo "===>>> 正在为您自动安装git程序 <<<==="
 		brew install git
-		echo "===>>> git程序已安装完成 <<<==="
+		echo "===>>> git程序已自动安装完成 <<<==="
+	fi
+}
+
+function_check_iterm2() {
+	if [[ ! -d /Applications/iTerm.app ]] && [[ ! -d ~/Downloads/iTerm.app ]]; then
+		echo "\t\t 提示：iTerm2程序未安装"
+		echo "===>>> 正在为您自动安装iTerm2程序 <<<==="
+		brew cask
+		brew cask install iTerm2
+		if [[ -d ~/Library/Caches/Homebrew/Cask ]]; then
+			brewCacheResult=`ls ~/Library/Caches/Homebrew/Cask | grep -i iterm2`
+			if [[ ${brewCacheResult} != "" ]]; then
+				echo "[恭喜]!iTerm2已下载成功"
+			else
+				echo "[哈哈]!iTerm2下载失败，别慌，好用的工具都不大好下载，手动下载安装也很简单，手动安装请复制此链接到浏览器：https://iterm2.com/downloads/stable/iTerm2-3_3_9.zip"
+			fi
+		else
+			echo "[哈哈]!iTerm2下载失败，别慌，好用的工具都不大好下载，手动下载安装也很简单，手动安装请复制此链接到浏览器：https://iterm2.com/downloads/stable/iTerm2-3_3_9.zip"
+		fi
+		# iTerm2 app's location: /Applications/iTerm.app || ~/Downloads/iTerm.app
+		# iTerm2 app's supports location: ~/Library/Application\ Support/iTerm2
+		if [[ -d /Applications/iTerm.app ]] || [[ -d ~/Downloads/iTerm.app ]]; then
+			echo "===>>> iTerm2程序已自动安装完成 <<<==="
+		else
+			echo "===>>> iTerm2程序已自动安装[失败]，手动下载安装也很简单，手动安装请复制此链接到浏览器：https://iterm2.com/downloads/stable/iTerm2-3_3_9.zip"
+		fi
+	else
+		echo "\t\t 本地已安装了 iTerm2 程序"
+	fi
+	if [[ ! -d ~/.oh-my-zsh ]]; then
+		sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+		if [[ -d ~/.oh-my-zsh ]]; then
+			echo "\t\t oh-my-zsh程序已安装完成"
+		fi
 	fi
 }
 
@@ -105,7 +139,8 @@ function_init() {
 	echo "tips初始化中，请稍候..."
 		echo "\t 1. git 程序检查中..."
 			function_check_git
-		echo "\t 2. iterm2，如已安装，请忽略。如未安装，请手动下载安装，官网安装地址：https://www.iterm2.com/downloads.html"
+		echo "\t 2. iterm2&oh-my-zsh 程序检查中..."
+			function_check_iterm2
 			# echo "\t\t 打开 item2，执行 chmod 755 ~/tips.sh;~/tips.sh init"
 		echo "\t 3. tips全局环境部署中..."
 			# init tips as a tool for mac os.
