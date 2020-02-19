@@ -212,6 +212,14 @@ function_print_dumpsys() {
 	fi
 }
 
+function_print_mac() {
+	if [[ ! -f $DEFINE_TARGET_TIPS_PROJECT_DIR/tips_mac.sh ]]; then
+		function_install_tips_packages
+	else
+		$DEFINE_TARGET_TIPS_PROJECT_DIR/tips_mac.sh "$@"
+	fi
+}
+
 function_print_usage() {
 	if [[ ! -f $DEFINE_TARGET_TIPS_PROJECT_DIR/tips_help.sh ]]; then
 		function_install_tips_packages
@@ -249,10 +257,13 @@ function_execute() {
 		"-d"|"--d"|"dump"|"-dump"|"--dump"|"dumpsys"|"-dumpsys"|"--dumpsys" )
 			function_print_dumpsys
 			;;
+		"mac"|"-mac"|"--mac" )
+			function_print_mac "$@"
+			;;
 		"-compare" )
 			function_print_beyound_compare
 			;;
 	esac
 }
 
-function_execute $1
+function_execute "$@"
