@@ -220,6 +220,14 @@ function_print_mac() {
 	fi
 }
 
+function_print_adb() {
+	if [[ ! -f $DEFINE_TARGET_TIPS_PROJECT_DIR/tips_adb.sh ]]; then
+		function_install_tips_packages
+	else
+		$DEFINE_TARGET_TIPS_PROJECT_DIR/tips_adb.sh "$@"
+	fi
+}
+
 function_print_usage() {
 	if [[ ! -f $DEFINE_TARGET_TIPS_PROJECT_DIR/tips_help.sh ]]; then
 		function_install_tips_packages
@@ -259,6 +267,9 @@ function_execute() {
 			;;
 		"mac"|"-mac"|"--mac" )
 			function_print_mac "$@"
+			;;
+		"-a"|"--a"|"-adb"|"-adb"|"--adb" )
+			function_print_adb "$@"
 			;;
 		"-compare" )
 			function_print_beyound_compare
