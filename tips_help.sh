@@ -18,9 +18,10 @@ function_print_help() {
 	logcat1="\n\t -l,--l,log,-log,--log,logcat,-logcat,--logcat                       日志系统：提示Android设备常用打日志方法..."
 	dumpsys="\n\t -d,--d,dump,-dump,--dump,dumpsys,-dumpsys,--dumpsys                 功能命令：常用dumpsys及pm命令..."
 	readmac="\n\t mac,-mac,--mac                                                      功能命令：读取Android设备的mac地址..."
+	adbCmds="\n\t -a,--a,adb,-adb,--adb                                               功能命令：查看adb命令操作..."
 	compare="\n\t -compare                                                            beyound compare秘钥..."
 
-	echo "$usage $help111 $init111 $version $l_versi $update1 $port111 $mount11 $logcat1 $dumpsys $readmac $compare"
+	echo "$usage $help111 $init111 $version $l_versi $update1 $port111 $mount11 $logcat1 $dumpsys $readmac $adbCmds $compare"
 }
 
 function_print_help

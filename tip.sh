@@ -268,7 +268,7 @@ function_execute() {
 		"mac"|"-mac"|"--mac" )
 			function_print_mac "$@"
 			;;
-		"-a"|"--a"|"-adb"|"-adb"|"--adb" )
+		"-a"|"--a"|"adb"|"-adb"|"--adb" )
 			function_print_adb "$@"
 			;;
 		"-compare" )
