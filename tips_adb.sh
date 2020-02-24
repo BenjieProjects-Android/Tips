@@ -6,6 +6,23 @@
 ### date: 2020年 2月22日 星期六 19时55分42秒 CST
 ### this is a develop tool for Android developer on MAC OS.
 
+function_operator_apks() {
+	echo "adb 连接设备：adb connect <IP>;adb root;adb connect <IP>;adb remount"
+		echo "\t 例如：adb connect 192.168.1.103;adb root;adb connect 192.168.1.103;adb remount"
+
+	echo "adb 安装命令：adb install -r -d -t <apkFilePath>"
+		echo "\t 例如：adb install -r -d -t ~/Downloads/Demo.apk"
+
+	echo "adb 卸载命令：adb uninstall <appPackage>"
+		echo "\t 例如：adb uninstall com.android.demo"
+
+	echo "adb 获取Android设备的文件：adb pull <androidFilePath> <targetFilePath>"
+		echo "\t 例如：adb pull /data/logcat.txt ~/Desktop/logcat.txt"
+
+	echo "adb 推送文件到Android设备：adb push <targetFilePath> <androidFilePath>"
+		echo "\t 例如：adb push ~/Desktop/Demo.apk /system/app/Demo.apk"
+}
+
 function_start_activity() {
 	echo "adb 启动Activity："
 		echo "启动主界面：adb shell am start <appPackage>"
@@ -113,6 +130,7 @@ function_logcat() {
 }
 
 function_print_support_commands() {
+	echo "adb 操作apk          tips -adb apks"
 	echo "adb 启动Activity命令  tips -adb activity"
 	echo "adb 发送广播命令       tips -adb receiver"
 	echo "adb 启动Service命令   tips -adb service"
@@ -124,6 +142,9 @@ function_print_support_commands() {
 
 function_print_adb_cmds() {
 	case ${2} in
+		"apks" )
+		function_operator_apks
+		;;
 		"activity" )
 			function_start_activity
 		;;
@@ -142,10 +163,4 @@ function_print_adb_cmds() {
 	esac
 }
 
-function_print_adb_usage() {
-	echo "adb 安装命令：adb install -r -d -t <apkFilePath>，例如：adb install -r -d -t ~/Downloads/Demo.apk"
-	echo "adb 卸载命令：adb uninstall <appPackage>，例如：adb uninstall com.android.demo"
-	function_print_adb_cmds "$@"
-}
-
-function_print_adb_usage "$@"
+function_print_adb_cmds "$@"
