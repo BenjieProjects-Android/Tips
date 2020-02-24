@@ -7,10 +7,15 @@
 ### this scrip is using for develop tools ---> tips
 
 function_print_port() {
-	echo "MAC 进入串口命令：\n\t screen /dev/tty.usbserial-gggggggg1 115200"
+	echo "MAC进入串口命令：\n\t screen /dev/tty.usbserial-gggggggg1 115200"
 
 	echo ""
-	echo "查找串口占用进程：\n\t ps | grep tty.usbserial-gggggggg1"
+	result=`ps | grep tty.usbserial-gggggggg1 | grep 115200 | grep SCREEN`
+	if [[ ${result} == "" ]]; then
+		echo "当前未检测到串口进程"
+	else
+		echo "串口进程占用信息：\n\t $result"
+	fi
 }
 
 function_print_port
