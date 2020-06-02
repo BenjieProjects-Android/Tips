@@ -192,6 +192,14 @@ function_print_mount() {
 	fi
 }
 
+function_print_git() {
+	if [[ ! -f $DEFINE_TARGET_TIPS_PROJECT_DIR/tips_git.sh ]]; then
+		function_install_tips_packages
+	else
+		$DEFINE_TARGET_TIPS_PROJECT_DIR/tips_git.sh "$@"
+	fi
+}
+
 function_print_beyound_compare() {
 	echo "I Love You"
 }
@@ -270,6 +278,9 @@ function_execute() {
 			;;
 		"-a"|"--a"|"adb"|"-adb"|"--adb" )
 			function_print_adb "$@"
+			;;
+		"git" )
+			function_print_git "$@"
 			;;
 		"-compare" )
 			function_print_beyound_compare
