@@ -200,6 +200,14 @@ function_print_git() {
 	fi
 }
 
+function_print_zyConfig() {
+	if [[ ! -f $DEFINE_TARGET_TIPS_PROJECT_DIR/tips_zy_configs.sh ]]; then
+		function_install_tips_packages
+	else
+		$DEFINE_TARGET_TIPS_PROJECT_DIR/tips_zy_configs.sh "$@"
+	fi
+}
+
 function_print_beyound_compare() {
 	echo "I Love You"
 }
@@ -281,6 +289,9 @@ function_execute() {
 			;;
 		"git" )
 			function_print_git "$@"
+			;;
+		"-c"|"--c"|"config"|"-config"|"--config" )
+			function_print_zyConfig "$@"
 			;;
 		"-compare" )
 			function_print_beyound_compare
