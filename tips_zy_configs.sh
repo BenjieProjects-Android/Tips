@@ -43,12 +43,21 @@ function_print_string_type() {
 function_print_list_type() {
 	echo "\n list/array 类型："
 		echo "\t key命名：config_list_function_xxx"
-		echo "\t value：功能需要的列表，如包名清单 com.cvte.tv.provision,com.cvte.tv.setting,com.cvte.settings"
+		echo "\t value：功能需要的列表，如包名清单 com.android.settings,com.android.launcher,com.android.helloworld"
 		echo "\t list/array类型的值，需要使用 \",\" 或 \"|\" 隔开，解析时使用字符串分割的形式使用。"
 }
 
+function_print_helper() {
+	echo " "
+	echo "\t ==> 查看 开关类 的相关配置：  tips -c enable/disable/switch"
+	echo "\t ==> 查看 数值类 的相关配置：  tips -c number/int/integer"
+	echo "\t ==> 查看 枚举类 的相关配置：  tips -c enum/Enum"
+	echo "\t ==> 查看 字符串类 的相关配置：tips -c string/str"
+	echo "\t ==> 查看 列表类 的相关配置：  tips -c list"
+}
+
 function_print_all_type() {
-	echo "\n 查看adb 操作apk          tips -adb apks"
+	function_print_helper
 	function_print_switch_type
 	function_print_number_type
 	function_print_enum_type
